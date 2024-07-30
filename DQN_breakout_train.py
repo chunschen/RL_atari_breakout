@@ -9,7 +9,6 @@ import atari_breakout_crop
 import pickle 
 import bz2
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 writer = SummaryWriter('F:\RF projects\\runs\\breakout_logs_3_2')
 memory_writer = bz2.open('DQN_memory.obj', 'wb') 
 

@@ -6,7 +6,7 @@ import numpy as np
 import random
 from collections import deque
 
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Define Deep Q-Network (DQN) Model
 class DQN(nn.Module):

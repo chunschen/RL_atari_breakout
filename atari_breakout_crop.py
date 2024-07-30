@@ -16,7 +16,7 @@ class atari_breakout_wrapper(gym.ObservationWrapper):
         self.fire_now = False
         self.frame_height = frame_height
         self.frame_width = frame_width
-        self.reset(seed = 1)
+        #self.reset(seed = 1)
 
 
     def observation(self, observation)->np.ndarray:
@@ -31,7 +31,7 @@ class atari_breakout_wrapper(gym.ObservationWrapper):
         obs, info = self.env.reset()
         obs, reward, terminated, truncated, info = self.env.step(2)
 
-        self.showObsImage(self.observation(obs))
+        #self.showObsImage(self.observation(obs))
         self.fire_now = True
         self.last_live = 5
         return self.observation(obs), info
