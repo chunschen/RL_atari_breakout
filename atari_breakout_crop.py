@@ -7,7 +7,7 @@ import numpy as np
 import torchvision.transforms.functional
 import gymnasium as gym
 
-''' A customized wraper for atari breakout game'''
+# A customized wraper for atari breakout game
 
 class atari_breakout_wrapper(gym.ObservationWrapper):
     def __init__(self, env, frame_height, frame_width):
@@ -58,5 +58,5 @@ class atari_breakout_wrapper(gym.ObservationWrapper):
         #   plt.imshow(new_obs[0], cmap='gray')
         return new_obs, reward, terminated, truncated, info
     
-    def showObsImage(self, obs):
+    def show_obs_image(self, obs):
         plt.imshow(obs, cmap='gray')
