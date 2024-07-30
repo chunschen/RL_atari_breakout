@@ -46,7 +46,6 @@ class atari_breakout_wrapper(gym.ObservationWrapper):
         
         if self.fire_now:
             pre_obs = observation
-            ct = random.randint(1, 50)
 
             while np.array_equal(pre_obs, observation):
                 observation, reward, terminated, truncated, info = self.env.step(1)
@@ -54,10 +53,10 @@ class atari_breakout_wrapper(gym.ObservationWrapper):
                     break
             self.fire_now = False
 
-        newObs =  self.observation(observation)
-        if reward > 0:
-           plt.imshow(newObs[0], cmap='gray')
-        return newObs, reward, terminated, truncated, info
+        new_obs =  self.observation(observation)
+        #if reward > 0:
+        #   plt.imshow(new_obs[0], cmap='gray')
+        return new_obs, reward, terminated, truncated, info
     
     def showObsImage(self, obs):
         plt.imshow(obs, cmap='gray')

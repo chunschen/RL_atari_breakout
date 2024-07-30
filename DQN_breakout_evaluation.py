@@ -3,6 +3,7 @@ import gymnasium as gym
 import atari_breakout_crop
 from DQN_core import DQNAgent
 import numpy as np
+import os
 
 env = gym.make('Breakout-v4',frameskip=4, render_mode="human")
 env = atari_breakout_crop.atari_breakout_wrapper(env, 160, 150)
@@ -13,7 +14,10 @@ action_dim = env.action_space.n
 agent = DQNAgent(state_dim, action_dim, lr=0.001, gamma=0.99, epsilon=0.001, epsilon_decay=0.999, warmup=1000, buffer_size=10000, update_step=10, update_repeat=50)
 
 #agent.model = agent.model.load_state_dict(torch.load(f"F:\RF projects\saved_agent_model_2\model-1801"))
-agent.model.load_state_dict(torch.load(f"F:\RL_atari_breakout\saved_agent_model_3\\retrained-model2_2-1400"))
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+agent.model.load_state_dict(torch.load(f"{dir_path}\saved_agent_model_3\\retrained-model2_2-1300"))
 # Evaluate the trained agent
 total_rewards = []
 num_episodes_eval = 10

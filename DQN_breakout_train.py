@@ -8,8 +8,10 @@ from DQN_core import DQNAgent
 import atari_breakout_crop
 import pickle 
 import bz2
+import os
 
-writer = SummaryWriter('F:\RF projects\\runs\\breakout_logs_3_2')
+dir_path = os.path.dirname(os.path.realpath(__file__))
+writer = SummaryWriter(f'{dir_path}\\runs\\breakout_logs_3_2')
 memory_writer = bz2.open('DQN_memory.obj', 'wb') 
 
 
@@ -24,7 +26,8 @@ action_dim = env.action_space.n
 agent = DQNAgent(state_dim, action_dim, lr=0.00025, gamma=0.99, epsilon=0.3, epsilon_decay=0.9999, warmup=10000, buffer_size=1000000, update_step=5, update_repeat=50)
 
 # continue the training from previous state, comment out this line if you want to train from the scratch
-agent.model.load_state_dict(torch.load(f"F:\RF projects\saved_agent_model_3\\retrained-model2_1-1875"))
+
+agent.model.load_state_dict(torch.load(f"{dir_path}\saved_agent_model_3\\retrained-model2_1-1875"))
 
 # Train the DQN agent with Experience Replay Buffer
 batch_size = 64
@@ -97,7 +100,7 @@ for episode in range(num_episodes):
         training_stat_steps = 0
 
     if  (episode > 1) and (episode % 25 == 0):
-        torch.save(agent.model.state_dict(), f"F:\RF projects\saved_agent_model_3\\retrained-model2_2-{episode}")
+        torch.save(agent.model.state_dict(), f"{dir_path}\saved_agent_model_3\\retrained-model2_2-{episode}")
         if(episode % 250 == 0):
             pickle.dump(agent.memory, memory_writer)
             memory_writer.flush()
